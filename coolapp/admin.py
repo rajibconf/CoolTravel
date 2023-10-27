@@ -25,3 +25,14 @@ class TemperatureDataModelAdmin(admin.ModelAdmin):
     search_fields = ['name', 'bn_name']
     readonly_fields = ('created_at', 'last_updated')
     ordering = ('average_temperature_2pm', )
+
+
+@admin.register(models.TemperatureForecast)
+class TemperatureForecastModelAdmin(admin.ModelAdmin):
+    list_display = [
+        'district', 'latitude', 'longitude', 'timezone',
+        'created_at', 'last_updated'
+    ]
+    search_fields = ['timezone', ]
+    readonly_fields = ('created_at', 'last_updated')
+    ordering = ('created_at', )
