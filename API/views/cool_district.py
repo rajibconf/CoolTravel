@@ -1,12 +1,15 @@
+"""API > views > cool_district.py"""
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from coolapp.models import District
-from API.serializers import DistrictSerializer
+from django.utils import timezone
 from concurrent.futures import ThreadPoolExecutor
 from django.core.cache import cache
-from coolapp.utils import get_temperature_forecast
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView
+# APP IMPORTS
+from coolapp.models import District, TemperatureData
+from coolapp.utils import get_temperature_forecast
+from API.serializers import DistrictSerializer
 
 
 class CoolestDistrictsPagination(PageNumberPagination):
@@ -29,9 +32,27 @@ class CoolestDistricts(ListAPIView):
         districts = District.objects.values('id', 'name', 'bn_name', 'lat', 'long')
 
         def fetch_and_process_district(district):
-            temperature_data = get_temperature_forecast(district['lat'], district['long'])
-            average_temperature = round(sum(temperature_data[3:10]) / 7, 1) if temperature_data else None
-            district['average_temperature_2pm'] = average_temperature
+            try:
+                temperature_data = TemperatureData.objects.get(district_id=district['id'])
+                if temperature_data.last_updated < timezone.now() - timezone.timedelta(hours=1):
+                    # Data is outdated, update it
+                    new_temperature_data = get_temperature_forecast(district['lat'], district['long'])
+                    average_temperature = round(sum(new_temperature_data[3:10]) / 7, 1) if new_temperature_data else None
+                    temperature_data.average_temperature_2pm = average_temperature
+                    temperature_data.last_updated = timezone.now()
+                    temperature_data.save()
+            except TemperatureData.DoesNotExist:
+                # Data doesn't exist, create a new entry
+                new_temperature_data = get_temperature_forecast(district['lat'], district['long'])
+                average_temperature = round(sum(new_temperature_data[3:10]) / 7, 1) if new_temperature_data else None
+                temperature_data = TemperatureData(
+                    district_id=district['id'],
+                    average_temperature_2pm=average_temperature,
+                    last_updated=timezone.now()
+                )
+                temperature_data.save()
+
+            district['average_temperature_2pm'] = temperature_data.average_temperature_2pm
             return district
 
         with ThreadPoolExecutor() as executor:
