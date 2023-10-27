@@ -1,4 +1,3 @@
-# views.py
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from coolapp.models import District
@@ -6,31 +5,34 @@ from API.serializers import DistrictSerializer
 from concurrent.futures import ThreadPoolExecutor
 from django.core.cache import cache
 from coolapp.utils import get_temperature_forecast
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.generics import ListAPIView
 
 
-class CoolestDistricts(APIView):
-    def get(self, request):
+class CoolestDistrictsPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+class CoolestDistricts(ListAPIView):
+    serializer_class = DistrictSerializer
+    pagination_class = CoolestDistrictsPagination
+
+    def get_queryset(self):
         # Check if the data is cached
         cached_data = cache.get("coolest_districts")
 
         if cached_data is not None:
-            return Response(cached_data)
+            return cached_data
 
-        districts = District.objects.all()
+        # Retrieve all districts and their coordinates in a single query
+        districts = District.objects.values('id', 'name', 'bn_name', 'lat', 'long')
 
         def fetch_and_process_district(district):
-            temperature_data = get_temperature_forecast(district.lat, district.long)
-            print(temperature_data, "temperature_data")
-            print(temperature_data[3:10], "temperature_data[3:10]")
+            temperature_data = get_temperature_forecast(district['lat'], district['long'])
             average_temperature = round(sum(temperature_data[3:10]) / 7, 1) if temperature_data else None
-            return {
-                "id": district.id,
-                "name": district.name,
-                "bn_name": district.bn_name,
-                "lat": district.lat,
-                "long": district.long,
-                "average_temperature_2pm": average_temperature
-            }
+            district['average_temperature_2pm'] = average_temperature
+            return district
 
         with ThreadPoolExecutor() as executor:
             # Use `map` to parallelize the execution of `fetch_and_process_district`
@@ -39,10 +41,7 @@ class CoolestDistricts(APIView):
         # Sort the list of districts by average temperature (coolest first)
         coolest_districts.sort(key=lambda x: x['average_temperature_2pm'])
 
-        # Get the top 10 coolest districts
-        top_10_coolest = coolest_districts[:10]
-
         # Cache the data for future requests (with a reasonable expiration time)
-        cache.set("coolest_districts", top_10_coolest, 3600)  # Cache data for 1 hour
+        cache.set("coolest_districts", coolest_districts, 3600)  # Cache data for 1 hour
 
-        return Response(top_10_coolest)
+        return coolest_districts

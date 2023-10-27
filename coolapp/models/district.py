@@ -22,9 +22,11 @@ class District(models.Model):
     )
     
     class Meta:
+        verbose_name = _('District')
+        verbose_name_plural = _('Districts')
         indexes = [
             models.Index(fields=['name', 'bn_name', 'lat', 'long'])
-        ]
+            ]
 
     def __str__(self):
         return self.name
