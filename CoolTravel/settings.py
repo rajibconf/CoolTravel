@@ -77,6 +77,8 @@ DJANGO_APPS = [
 PLUGIN_APPS = [
     # https://django-debug-toolbar.readthedocs.io/en/latest/
     'debug_toolbar',
+    # https://github.com/jazzband/django-widget-tweaks
+    'widget_tweaks',
     # https://www.django-rest-framework.org/#installation
     'rest_framework',
     # https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication

@@ -11,3 +11,4 @@ django-cors-headers
 django-debug-toolbar
 django-filter
 djangorestframework
+django-widget-tweaks
