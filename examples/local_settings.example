@@ -52,11 +52,6 @@ DB_CONFIG = {
     'HOST': os.getenv('DB_HOST', '127.0.0.1'),
     'PORT': os.getenv('DB_PORT', 5432),
     'NAME': os.getenv('DB_NAME', 'cooltravel_db'),
-    'USER': os.getenv('DB_USER', 'cooltravel_user'),
+    'USER': os.getenv('DB_USER', 'postgres'),
     'PASSWORD': os.getenv('DB_PASS', 'admin')
 }
-
-# Celery
-CELERY_BROKER_URL = 'amqp://127.0.0.1:5672/'
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_CACHE_BACKEND = 'django-cache'
