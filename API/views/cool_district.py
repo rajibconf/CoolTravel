@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView
+from rest_framework import permissions
 # APP IMPORTS
 from coolapp.models import District, TemperatureData, TemperatureForecast
 from coolapp.utils import (
@@ -28,6 +29,7 @@ class CoolestDistrictsPagination(PageNumberPagination):
 class CoolestDistricts(ListAPIView):
     serializer_class = DistrictSerializer
     pagination_class = CoolestDistrictsPagination
+    permission_classes = (permissions.AllowAny,)  # Allow public access
 
     def get_queryset(self):
         # Check if the data is cached
@@ -81,6 +83,7 @@ class CoolestDistricts(ListAPIView):
 
 
 class TravelRecommendation(APIView):
+    permission_classes = (permissions.AllowAny,)  # Allow public access
 
     def post(self, request):
         source_location = request.query_params.get("source_location")
