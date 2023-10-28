@@ -83,7 +83,7 @@
         - **Response Body** (JSON):
             - `next_page` (integer): The page number of the next set of results, if available.
             - `previous_page` (integer): The page number of the previous set of results, if available.
-            - `results` (array of objects): An array of cool districts. Each object represents a district and may include various attributes such as `name`, `population`, etc.
+            - `results` (array of objects): An array of cool districts. Each object represents a district and may include various attributes such as `name`, `average_temperature_2pm`, etc.
     
     **Example Response**:
     ```json
