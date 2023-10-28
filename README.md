@@ -53,7 +53,7 @@
     ```
 
 6. ### CoolTravel's API Instructions
-    ### 2. Top 10 Coolest District API (Average temperature at 2 PM for the next 7 days)
+    ### 1. Top 10 Coolest District API (Average temperature at 2 PM for the next 7 days)
     ![GitHub Logo](https://github.com/rajibconf/CoolTravel/blob/main/staticfiles/images/coolest_district.png)
 
     **API Endpoint**: `GET http://127.0.0.1:8000/api/cool-district/`
