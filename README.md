@@ -43,20 +43,66 @@
     python manage.py makemigrations
     python manage.py migrate
     python manage.py createsuperuser
-    python manage.py runserver
     flake8
+    python manage.py runserver
     ```
 5. ### Import district data from a JSON file (json_file_path = 'fixtures/bd-districts.json')
     - Run `python manage.py import_district_data` to create district with lat, long
     ```shell script
     python manage.py import_district_data
     ```
-6. ### API Instructions
-    - Top 10 Coolest District API
+6. ### CoolTravel's API Instructions
+    ### Top 10 Coolest District API
     ![GitHub Logo](https://github.com/rajibconf/CoolTravel/blob/main/staticfiles/images/coolest_district.png)
+    
 
-    - Travel Recommendation API
+
+    ### Travel Recommendation API
     ![GitHub Logo](https://github.com/rajibconf/CoolTravel/blob/main/staticfiles/images/travel_recommendation.png)
+
+    **API Endpoint**: `POST http://127.0.0.1:8000/api/travel-recommendation/`
+    **Request**:
+    - **HTTP Method**: POST
+    - **Query Parameters**:
+        - `source_location` (string): The source location for the travel recommendation.
+        - `destination_location` (string): The destination location for the travel recommendation.
+        - `travel_date` (string): The date of travel in the format "DD-MM-YYYY".
+    **Example Request**:
+    ```http
+    POST http://127.0.0.1:8000/api/travel-recommendation/?source_location=barishal&destination_location=rajshahi&travel_date=29-10-2023
+
+    ```shell script
+    # Example using Python and requests library
+    import requests
+
+    url = "http://127.0.0.1:8000/api/travel-recommendation/"
+    params = {
+        "source_location": "barishal",
+        "destination_location": "rajshahi",
+        "travel_date": "29-10-2023"
+    }
+
+    response = requests.post(url, params=params)
+    print(response.json())
+    ```
+    **Response**:
+    - **Status Code**:
+        - `200 OK`: The request was successful.
+        - `400 Bad Request`: The request was invalid or missing parameters.
+        - **Response Body** (JSON):
+        - `recommendation` (string): A travel recommendation based on the provided locations and date.
+
+    **Example Response**:
+
+    ```json
+    {
+        "source_location": "Barishal",
+        "destination_location": "Rajshahi",
+        "source_temperature_2pm": "32.4°C",
+        "destination_temperature_2pm": "31.8°C",
+        "recommendation_message": "Your Barishal is warmer than your destination Rajshahi. Traveling is a good idea."
+    }
+
 
    > _NOTE: Browse to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view the site. Admin site is at url [/manage](http://127.0.0.1:8000/manage) changed from default to keep the project secure. Admin url can be changed in `settings.py` --> `ADMIN_URL`_
  
