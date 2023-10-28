@@ -70,7 +70,8 @@
     **Example Request**:
     ```http
     POST http://127.0.0.1:8000/api/travel-recommendation/?source_location=barishal&destination_location=rajshahi&travel_date=29-10-2023
-
+    ```
+    
     ```shell script
     # Example using Python and requests library
     import requests
@@ -102,7 +103,7 @@
         "destination_temperature_2pm": "31.8°C",
         "recommendation_message": "Your Barishal is warmer than your destination Rajshahi. Traveling is a good idea."
     }
-
+    ```
 
    > _NOTE: Browse to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view the site. Admin site is at url [/manage](http://127.0.0.1:8000/manage) changed from default to keep the project secure. Admin url can be changed in `settings.py` --> `ADMIN_URL`_
  
