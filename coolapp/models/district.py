@@ -20,13 +20,13 @@ class District(models.Model):
     last_updated = models.DateTimeField(
         _('Last Updated'), auto_now=True, null=True
     )
-    
+
     class Meta:
         verbose_name = _('District')
         verbose_name_plural = _('Districts')
         indexes = [
             models.Index(fields=['name', 'bn_name', 'lat', 'long'])
-            ]
+        ]
 
     def __str__(self):
         return self.name

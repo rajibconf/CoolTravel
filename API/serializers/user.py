@@ -16,7 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'email', 'last_login', 'is_active',
             'is_staff', 'is_superuser'
-            ]
+        ]
         read_only_fields = (
-            'last_login', 'is_active', 'is_staff', 'is_superuser',
+            'last_login', 'is_active',
+            'is_staff', 'is_superuser',
         )

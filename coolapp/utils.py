@@ -14,14 +14,14 @@ def get_temperature_forecast(lat, long):
         long (float): The longitude of the location.
 
     Returns:
-        list: A list of floats representing the temperature in degrees Celsius for each hour.
+        list: A list of floats representing the temperature in degrees Celsius for each hour. # noqa
         None: If the API request fails or the data is invalid.
     """
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&hourly=temperature_2m&timezone=auto&forecast_days=7" # forecast_days=(1,16)
+    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&hourly=temperature_2m&timezone=auto&forecast_days=7" # forecast_days=(1,16) # noqa
     try:
         response = requests.get(url)
-        response.raise_for_status() # Raise an exception if the status code is not 200
-        data = response.json() # Parse the JSON data
+        response.raise_for_status()  # Raise an exception if the status code is not 200 # noqa
+        data = response.json()  # Parse the JSON data
         # Return a list of temperatures using a list comprehension
         return [temp for temp in data["hourly"]["temperature_2m"]]
     except requests.exceptions.RequestException as e:
@@ -36,11 +36,12 @@ def get_temperature_forecast(lat, long):
 def get_temperature_forecast_raw(lat, long):
     """Get the hourly temperature forecast for a given latitude and longitude.
     """
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&hourly=temperature_2m&timezone=auto&forecast_days=7" # forecast_days=(1,16)
+
+    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&hourly=temperature_2m&timezone=auto&forecast_days=7" # forecast_days=(1,16) # noqa
     try:
         response = requests.get(url)
-        response.raise_for_status() # Raise an exception if the status code is not 200
-        data = response.json() # Parse the JSON data
+        response.raise_for_status()  # Raise an exception if the status code is not 200 # noqa
+        data = response.json()  # Parse the JSON data
         return data
     except requests.exceptions.RequestException as e:
         # Handle any HTTP errors

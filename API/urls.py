@@ -15,14 +15,16 @@ router = DefaultRouter()
 
 # https://docs.djangoproject.com/en/3.1/topics/http/urls/
 urlpatterns = [
-    # auth --------------------------------------------------------------------
+    # auth ----------------------------------------------------------------
     path('auth/login/', views.ObtainTokenView.as_view(), name='auth-login'),
     path('auth/logout/', views.LogoutView.as_view(), name='auth-logout'),
-    
-    # Coolest District ---------------------------------------------------------
-    path('cool-district/', views.CoolestDistricts.as_view(), name='cool-district'),
-    path('travel-recommendation/', views.TravelRecommendation.as_view(), name='travel-recommendation'),
 
-    # router ------------------------------------------------------------------
+    # Coolest District -----------------------------------------------------
+    path('cool-district/', views.CoolestDistricts.as_view(),
+         name='cool-district'),
+    path('travel-recommendation/', views.TravelRecommendation.as_view(),
+         name='travel-recommendation'),
+
+    # router --------------------------------------------------------------
     path('', include(router.urls)),
 ]
