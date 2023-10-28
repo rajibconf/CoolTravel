@@ -53,10 +53,10 @@
     ```
 6. ### API Instructions
     - Top 10 Coolest District API
-    ![GitHub Logo](https://github.com/yourusername/yourrepository/blob/main/staticfiles/images/coolest_district.png)
+    ![GitHub Logo](https://github.com/rajibconf/CoolTravel/blob/main/staticfiles/images/coolest_district.png)
 
     - Travel Recommendation API
-    ![GitHub Logo](https://github.com/yourusername/yourrepository/blob/main/staticfiles/images/travel_recommendation.png)
+    ![GitHub Logo](https://github.com/rajibconf/CoolTravel/blob/main/staticfiles/images/travel_recommendation.png)
 
    > _NOTE: Browse to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view the site. Admin site is at url [/manage](http://127.0.0.1:8000/manage) changed from default to keep the project secure. Admin url can be changed in `settings.py` --> `ADMIN_URL`_
  
