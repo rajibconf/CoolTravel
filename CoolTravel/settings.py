@@ -17,7 +17,6 @@ from pathlib import Path
 from CoolTravel.local_settings import (
     SECRET_KEY, TEMPLATES_DIR, STATICFILES_DIR, STATIC_DIR, MEDIA_DIR,
     LOGS_DIR, DEBUG, ENABLE_HTTPS, ALLOWED_HOSTS, INTERNAL_IPS, DB_CONFIG,
-    CELERY_BROKER_URL, CELERY_RESULT_BACKEND, CELERY_CACHE_BACKEND,
     CORS_ALLOWED_ORIGINS
 )
 from CoolTravel.logging import LOGGING
@@ -87,10 +86,6 @@ PLUGIN_APPS = [
     'django_filters',
     # https://github.com/adamchainz/django-cors-headers
     'corsheaders',
-    # https://docs.celeryproject.org/en/stable/django/first-steps-with-django.html#extensions
-    'django_celery_results',
-    # https://docs.celeryproject.org/en/stable/userguide/periodic-tasks.html
-    'django_celery_beat',
     'django_extensions'
 ]
 
@@ -220,20 +215,6 @@ MEDIA_ROOT = MEDIA_DIR
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# Celery ----------------------------------------------------------------------
-# https://docs.celeryproject.org/en/stable/userguide/configuration.html#configuration-and-defaults
-CELERY_BROKER_URL = os.getenv(
-    'CELERY_BROKER_URL', CELERY_BROKER_URL
-)
-# https://docs.celeryproject.org/en/stable/django/first-steps-with-django.html#extensions
-CELERY_RESULT_BACKEND = os.getenv(
-    'CELERY_RESULT_BACKEND', CELERY_RESULT_BACKEND
-)
-CELERY_CACHE_BACKEND = os.getenv(
-    'CELERY_CACHE_BACKEND', CELERY_CACHE_BACKEND
-)
 
 # Logging ---------------------------------------------------------------------
 # https://docs.djangoproject.com/en/3.0/topics/logging/
