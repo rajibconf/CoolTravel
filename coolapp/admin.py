@@ -31,7 +31,7 @@ class TemperatureDataModelAdmin(admin.ModelAdmin):
 class TemperatureForecastModelAdmin(admin.ModelAdmin):
     list_display = [
         'district', 'latitude', 'longitude', 'timezone',
-        'created_at', 'last_updated'
+        'travel_date', 'created_at', 'last_updated'
     ]
     search_fields = ['timezone', ]
     readonly_fields = ('created_at', 'last_updated')

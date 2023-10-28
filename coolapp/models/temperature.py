@@ -39,6 +39,7 @@ class TemperatureForecast(models.Model):
     hourly_units_temperature_2m = models.CharField(max_length=10)
     hourly_time = models.JSONField()
     hourly_temperature_2m = models.JSONField()
+    travel_date = models.DateTimeField(null=True)
 
     created_at = models.DateTimeField(_('Created At'), auto_now_add=True)
     last_updated = models.DateTimeField(_('Last Updated'))
