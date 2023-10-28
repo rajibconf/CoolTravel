@@ -1,11 +1,14 @@
 """API > views > cool_district.py"""
-from rest_framework.response import Response
-from rest_framework.views import APIView
+# PYTHON IMPORTS
+from concurrent.futures import ThreadPoolExecutor
+# DJANGO IMPORTS
 from django.utils import timezone
 from datetime import datetime
 from django.db.models import Q
-from concurrent.futures import ThreadPoolExecutor
 from django.core.cache import cache
+# DRF IMPORTS
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView
 # APP IMPORTS
