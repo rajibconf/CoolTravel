@@ -53,11 +53,11 @@
     ```
 
 6. ### CoolTravel's API Instructions
-    ### Top 10 Coolest District API
+    ### 2. Top 10 Coolest District API (Average temperature at 2 PM for the next 7 days)
     ![GitHub Logo](https://github.com/rajibconf/CoolTravel/blob/main/staticfiles/images/coolest_district.png)
 
     **API Endpoint**: `GET http://127.0.0.1:8000/api/cool-district/`
-    **Request**:
+    - **Request**:
         - **HTTP Method**: GET
         - **Query Parameters**:
             - `page` (integer): The page number to retrieve cool districts. Defaults to 1.
@@ -108,11 +108,12 @@
     -------
     ```
     
-    ### Travel Recommendation API
+    ### 2. Travel Recommendation API (Temperature at 2 PM at the source location and destination location on a given day and the day must be within the next 7 days.)
+    
     ![GitHub Logo](https://github.com/rajibconf/CoolTravel/blob/main/staticfiles/images/travel_recommendation.png)
 
     **API Endpoint**: `POST http://127.0.0.1:8000/api/travel-recommendation/`
-    **Request**:
+    - **Request**:
         - **HTTP Method**: POST
         - **Query Parameters**:
             - `source_location` (string): The source location for the travel recommendation.
@@ -139,11 +140,11 @@
     print(response.json())
     ```
     **Response**:
-        - **Status Code**:
-            - `200 OK`: The request was successful.
-            - `400 Bad Request`: The request was invalid or missing parameters.
-        - **Response Body** (JSON):
-            - `recommendation` (string): A travel recommendation based on the provided locations and date.
+    - **Status Code**:
+        - `200 OK`: The request was successful.
+        - `400 Bad Request`: The request was invalid or missing parameters.
+    - **Response Body** (JSON):
+        - `recommendation` (string): A travel recommendation based on the provided locations and date.
 
     **Example Response**:
     ```json
