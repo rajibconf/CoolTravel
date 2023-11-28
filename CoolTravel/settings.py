@@ -86,7 +86,9 @@ PLUGIN_APPS = [
     'django_filters',
     # https://github.com/adamchainz/django-cors-headers
     'corsheaders',
-    'django_extensions'
+    'django_extensions',
+    # https://pypi.org/project/django-sql-explorer/
+    'explorer',
 ]
 
 # add project applications here
@@ -222,3 +224,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if os.getenv('DISABLE_LOGGING', False):  # for celery in jenkins ci only
     LOGGING_CONFIG = None
 LOGGING = LOGGING  # logging.py
+
+
+EXPLORER_CONNECTIONS = { 'Default': 'default' }
+EXPLORER_DEFAULT_CONNECTION = 'default'
+EXPLORER_AUTORUN_QUERY_WITH_PARAMS = False

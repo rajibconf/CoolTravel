@@ -40,7 +40,7 @@ LOGGING = {
             'level': 'DEBUG',
             'formatter': 'verbose',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': LOGS_DIR / 'debug.log',
+            'filename': os.path.join(f"{LOGS_DIR}/debug.log"),
             'when': 'midnight',
             'backupCount': 30,
         },

@@ -44,6 +44,9 @@ urlpatterns = [
 
     # drf api auth ------------------------------------------------------------
     path('api-auth/', include('rest_framework.urls')),
+    
+    # sql explorer ------------------------------------------------------------
+    path('explorer/', include('explorer.urls')),
 ]
 
 # serve media files in development environment --------------------------------
